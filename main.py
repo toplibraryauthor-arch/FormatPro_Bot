@@ -102,7 +102,7 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
 @dp.message(Command("start"))
 async def start_command(message: Message):
     """Handle /start command"""
-    logger.info(f"Start command received from {message.from_user.id}")
+    logger.info(f"✅ Start command received from {message.from_user.id}")
     
     welcome_text = (
         f"👋 **Hello {message.from_user.first_name}!**\n\n"
@@ -134,6 +134,7 @@ async def start_command(message: Message):
 @dp.message(Command("convert"))
 async def convert_command(message: Message, state: FSMContext):
     """Handle /convert command"""
+    logger.info(f"🔄 Convert command received from {message.from_user.id}")
     await state.set_state(ConversionStates.selecting_target_format)
     
     await message.answer(
@@ -383,6 +384,7 @@ async def main():
     logger.info(f"📌 Version: {BOT_VERSION}")
     logger.info(f"🐍 Python: {sys.version}")
     logger.info(f"🔧 Debug Mode: {DEBUG_MODE}")
+    logger.info(f"📁 Temp Directory: {TEMP_DIR.absolute()}")
     
     try:
         # Start polling
